@@ -2,16 +2,13 @@ package com.xaviermasle.kafka;
 
 import com.xaviermasle.kafka.constants.IKafkaConstants;
 import com.xaviermasle.kafka.producer.ProducerCreator;
-import org.apache.kafka.clients.KafkaClient;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.KafkaAdminClient;
-import org.apache.kafka.clients.admin.ListTopicsResult;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
-import org.apache.kafka.common.KafkaFuture;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.common.utils.Bytes;
 import org.apache.kafka.streams.KafkaStreams;
@@ -24,16 +21,14 @@ import org.apache.kafka.streams.kstream.Produced;
 import org.apache.kafka.streams.state.KeyValueStore;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Properties;
-import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 public class AppStreaming {
 
     public static void main(final String[] args) throws Exception {
-        // createTopic();
-        // runProducer();
+        createTopic();
+        runProducer();
         Properties props = new Properties();
         props.put(StreamsConfig.APPLICATION_ID_CONFIG, "wordcount-application");
         props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
