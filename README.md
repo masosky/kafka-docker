@@ -5,7 +5,10 @@ Contains a Docker Compose that have 4 brokers and 1 Zookeeper
 
 `mvn clean install`
 
-Run App.java in order to produce and consume messages. Notice that `runProducers()` must be uncommented
+### Kafka
+Run `App.java` in order to produce and consume messages. Notice that `runProducers()` must be uncommented
+### Kafka Streams
+Run `AppStreaming.java`
 
 ## Stop
 `docker-compose down`
