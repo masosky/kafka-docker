@@ -14,7 +14,7 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 public class App {
     public static void main(String[] args) {
 		// runProducer();
-        runConsumer();
+        // runConsumer();
     }
 
     static void runConsumer() {
@@ -53,10 +53,7 @@ public class App {
                 RecordMetadata metadata = producer.send(record).get();
                 System.out.println("Record sent with key " + index + " to partition " + metadata.partition()
                         + " with offset " + metadata.offset());
-            } catch (ExecutionException e) {
-                System.out.println("Error in sending record");
-                System.out.println(e);
-            } catch (InterruptedException e) {
+            } catch (ExecutionException | InterruptedException e) {
                 System.out.println("Error in sending record");
                 System.out.println(e);
             }
