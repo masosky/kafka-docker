@@ -14,10 +14,7 @@ import org.apache.kafka.common.utils.Bytes;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
-import org.apache.kafka.streams.kstream.KStream;
-import org.apache.kafka.streams.kstream.KTable;
-import org.apache.kafka.streams.kstream.Materialized;
-import org.apache.kafka.streams.kstream.Produced;
+import org.apache.kafka.streams.kstream.*;
 import org.apache.kafka.streams.state.KeyValueStore;
 
 import java.util.Arrays;
@@ -28,7 +25,6 @@ public class AppStreaming {
 
     public static void main(final String[] args) throws Exception {
         createTopic();
-        runProducer();
         Properties props = new Properties();
         props.put(StreamsConfig.APPLICATION_ID_CONFIG, "wordcount-application");
         props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
@@ -42,9 +38,11 @@ public class AppStreaming {
                 .groupBy((key, word) -> word)
                 .count(Materialized.<String, Long, KeyValueStore<Bytes, byte[]>>as("counts-store"));
         wordCounts.toStream().to("WordsWithCountsTopic", Produced.with(Serdes.String(), Serdes.Long()));
+        wordCounts.toStream().print(Printed.toSysOut());
 
         KafkaStreams streams = new KafkaStreams(builder.build(), props);
         streams.start();
+        runProducer();
     }
 
     private static void createTopic() throws ExecutionException, InterruptedException {
@@ -52,16 +50,15 @@ public class AppStreaming {
         properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, IKafkaConstants.KAFKA_BROKERS);
         final AdminClient admin = KafkaAdminClient.create(properties);
         NewTopic textLinesTopic = new NewTopic("TextLinesTopic", 4, (short) 2);
-        NewTopic wordsWithCountsTopic = new NewTopic("WordsWithCountsTopic", 4, (short) 2);
-        admin.createTopics(Arrays.asList(textLinesTopic, wordsWithCountsTopic));
+        admin.createTopics(Arrays.asList(textLinesTopic));
     }
 
     static void runProducer() {
-        Producer<Long, String> producer = ProducerCreator.createProducer();
+        Producer<String, String> producer = ProducerCreator.createProducerString();
 
         for (int index = 0; index < IKafkaConstants.MESSAGE_COUNT; index++) {
-            final ProducerRecord<Long, String> record = new ProducerRecord<Long, String>("TextLinesTopic",
-                    "This is record " + index);
+            final ProducerRecord<String, String> record = new ProducerRecord<String, String>("TextLinesTopic",
+                    createRandomWord(5));
             try {
                 RecordMetadata metadata = producer.send(record).get();
                 System.out.println("Record sent with key " + index + " to partition " + metadata.partition()
@@ -71,6 +68,16 @@ public class AppStreaming {
                 System.out.println(e);
             }
         }
+    }
+
+    public static String createRandomWord(int len) {
+        String name = "";
+        for (int i = 0; i < len; i++) {
+            int v = 1 + (int) (Math.random() * 26);
+            char c = (char) (v + (i == 0 ? 'A' : 'a') - 1);
+            name += c;
+        }
+        return name;
     }
 
 }
