@@ -1,0 +1,8 @@
+/Users/xaviermasleszkiewicz/repositories/kafka-docker/src/main/java/com/xaviermasle/kafka/producer/ProducerCreator.java
+/Users/xaviermasleszkiewicz/repositories/kafka-docker/src/main/java/com/xaviermasle/kafka/serializer/CustomSerializer.java
+/Users/xaviermasleszkiewicz/repositories/kafka-docker/src/main/java/com/xaviermasle/kafka/deserializer/CustomDeserializer.java
+/Users/xaviermasleszkiewicz/repositories/kafka-docker/src/main/java/com/xaviermasle/kafka/consumer/ConsumerCreator.java
+/Users/xaviermasleszkiewicz/repositories/kafka-docker/src/main/java/com/xaviermasle/kafka/constants/IKafkaConstants.java
+/Users/xaviermasleszkiewicz/repositories/kafka-docker/src/main/java/com/xaviermasle/kafka/pojo/CustomObject.java
+/Users/xaviermasleszkiewicz/repositories/kafka-docker/src/main/java/com/xaviermasle/kafka/partitioner/CustomPartitioner.java
+/Users/xaviermasleszkiewicz/repositories/kafka-docker/src/main/java/com/xaviermasle/kafka/App.java

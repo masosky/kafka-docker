@@ -1,0 +1,8 @@
+com/xaviermasle/kafka/App.class
+com/xaviermasle/kafka/producer/ProducerCreator.class
+com/xaviermasle/kafka/partitioner/CustomPartitioner.class
+com/xaviermasle/kafka/deserializer/CustomDeserializer.class
+com/xaviermasle/kafka/constants/IKafkaConstants.class
+com/xaviermasle/kafka/consumer/ConsumerCreator.class
+com/xaviermasle/kafka/pojo/CustomObject.class
+com/xaviermasle/kafka/serializer/CustomSerializer.class
