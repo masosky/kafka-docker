@@ -3,7 +3,7 @@ package com.xaviermasle.kafka.constants;
 public interface IKafkaConstants {
 	public static String KAFKA_BROKERS = "localhost:9092,localhost:9093,localhost:9094,localhost:9095";
 	
-	public static Integer MESSAGE_COUNT=500;
+	public static Integer MESSAGE_COUNT=2000;
 	
 	public static String CLIENT_ID="client1";
 	
