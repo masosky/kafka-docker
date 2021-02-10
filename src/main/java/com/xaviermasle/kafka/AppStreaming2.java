@@ -20,6 +20,13 @@ import java.util.Arrays;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * If we generate a messages like these:
+ * topic xavi-1  <key,value> <G,qwe> <J,rty>
+ * topic xavi-2  <key,value> <Y,vcz> <G,yui>
+ *
+ * A new entry will be generated in xavi-out with <key,value> <rty-yui,G>
+ */
 public class AppStreaming2 {
 
     public static void main(final String[] args) throws Exception {
